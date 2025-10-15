@@ -1,4 +1,3 @@
-
 import "./App.css";
 import { useEffect, useState } from "react";
 
@@ -34,11 +33,16 @@ function App() {
   const [events, updateEvents] = useState([]);
   const [isfiltered, updateFiltered] = useState(false);
   const [searchText, chgSearchText] = useState("");
-  
+  const [searchID, chgSearchId] = useState("");
 
   useEffect(() => {
     getApi().then((results) => {
       let main = results;
+
+      if (searchID) {
+        const updatedArray = searchFunctionID(results, searchText);
+        main = updatedArray;
+      }
 
       if (searchText) {
         const updatedArray = searchFunction(results, searchText);
@@ -52,7 +56,7 @@ function App() {
 
       updateEvents(main);
     });
-  }, [isfiltered, searchText]);
+  }, [isfiltered, searchText, searchID]);
 
   return (
     <>
@@ -65,10 +69,17 @@ function App() {
           type="search"
         />
 
+        <input
+          placeholder="search by ID"
+          onChange={(e) => {
+            chgSearchId(e.target.value);
+          }}
+          type="search"
+        />
+
         <button
           className={isfiltered ? "filtered" : ""}
           onClick={() => {
-           
             updateFiltered(!isfiltered);
           }}>
           Filter by pets
@@ -113,6 +124,15 @@ function searchFunction(list: Event[], text: string) {
   return result;
 }
 
+function searchFunctionID(list: Event[], ID: string) {
+  const result = list.filter((element: Event) => {
+    if (element.id.toString() === ID) {
+      return element;
+    }
+  });
+
+  return result;
+}
 function filterFunction(list: Event[]) {
   const result = list.filter((element: Event) => {
     if (element.petsAllowed) {
