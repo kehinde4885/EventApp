@@ -67,8 +67,8 @@ function App() {
 
         <button
           className={isfiltered ? "filtered" : ""}
-          onClick={(e) => {
-            updateEvents(filterFunction(events));
+          onClick={() => {
+           
             updateFiltered(!isfiltered);
           }}>
           Filter by pets
