@@ -40,7 +40,7 @@ function App() {
       let main = results;
 
       if (searchID) {
-        const updatedArray = searchFunctionID(results, searchText);
+        const updatedArray = searchFunctionID(results, searchID);
         main = updatedArray;
       }
 
