@@ -1,0 +1,34 @@
+.events {
+  display: flex;
+  flex-direction: column;
+  row-gap: 5px;
+  max-width: 500px;
+}
+
+.event-card {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1.25rem;
+  background-color: bisque;
+  border-radius: 6px;
+
+  & .header{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    row-gap: 8px;
+
+  }
+
+
+
+}
+
+.filtered{
+  background-color: green;
+}
+
+h1 {
+  font-size: 1.25rem;
+  text-transform: uppercase;
+
+}
